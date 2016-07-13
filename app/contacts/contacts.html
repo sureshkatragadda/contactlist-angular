@@ -1,0 +1,28 @@
+<div class="container">
+  <h2>All Contacts</h2>
+
+  <a href="#!/contacts/add"><img src="images/add-contact.ico" width="30px;"></img></a>
+
+  <label>Search: <input ng-model="searchText" class="form-control"></label>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Phone</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="contact in contacts | filter:searchText">
+        <td>{{contact.firstName}}</td>
+        <td>{{contact.lastName}}</td>
+        <td>{{contact.phone}}</td>
+        <td><a href="#" ng-click="removeContact(contact)"><img src="images/delete.png"></img></a>
+</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
