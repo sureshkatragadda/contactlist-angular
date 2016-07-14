@@ -1,9 +1,12 @@
 <div class="container">
   <h2>All Contacts</h2>
 
-  <a href="#!/contacts/add"><img src="images/add-contact.ico" width="30px;"></img></a>
-
-  <label>Search: <input ng-model="searchText" class="form-control"></label>
+<p>
+  <input ng-model="searchText" placeholder="Search Contacts" class="form-control" style="width:400px;" maxlength="50">
+</p>
+  <div class="pull-left">
+    <a href="#!/contacts/add" title="Add New Contact"><img src="images/add-contact.ico" width="30px;"></img></a>
+  </div>
 
   <table class="table table-striped">
     <thead>
@@ -19,9 +22,8 @@
         <td>{{contact.firstName}}</td>
         <td>{{contact.lastName}}</td>
         <td>{{contact.phone}}</td>
-        <td><a href="#" ng-click="removeContact(contact)"><img src="images/delete.png"></img></a>
-</td>
-
+        <td><a href="#!/contacts/edit/{{contacts.indexOf(contact)}}" title="Edit Contact"><img src="images/edit-icon-24.png" alt="Edit Contact"></img></a>
+        <a href="#" ng-click="removeContact(contact)" title="Remove Contact"><img src="images/remove-icon-24.png"></img></a></td>
       </tr>
     </tbody>
   </table>

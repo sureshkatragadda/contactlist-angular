@@ -9,23 +9,27 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'ContactsCtrl'
   })
   .when('/contacts/add', {
-    templateUrl: 'contacts/contacts-add.html',
+    templateUrl: 'contacts/contacts-form.html',
+    controller: 'ContactsCtrl'
+  })
+  .when('/contacts/edit/:contact_index', {
+    templateUrl: 'contacts/contacts-form.html',
     controller: 'ContactsCtrl'
   });
 }]);
 
-app.controller('ContactsCtrl', ['$scope', '$http', '$location', 'ContactService', function($scope, $http, $location, ContactService) {
-  this.contact = {};
+app.controller('ContactsCtrl', ['$scope', '$http', '$location', 'ContactService', '$routeParams', function($scope, $http, $location, ContactService, $routeParams) {
   // load from service
+  $scope.path = $location.path();
+  console.log($scope.path);
   $scope.contacts = ContactService.getContacts();
-  console.log($scope.contacts);
+  var index = $routeParams.contact_index;
+  $scope.currentContact = $scope.contacts[index];
 
-
-  $scope.addContact = function(data){
-    console.log(data);
-    $scope.contacts.push(data);
-    console.log($scope.contacts);
-    $location.path('/contacts');
+  $scope.addContact = function(){
+   var contact = $scope.currentContact;
+   contact.id = $scope.contacts.length;
+   $scope.contacts.push(contact);
   };
 
   $scope.removeContact = function (item) {
